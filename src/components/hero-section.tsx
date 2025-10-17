@@ -33,19 +33,19 @@ function HeroSection() {
   }, [currentIndex]);
 
   return (
-    <div className="relative w-full overflow-hidden h-[80vh] bg-black">
+    <div className="relative w-full overflow-hidden h-[100vh] bg-black">
       <div
-        className={`flex ${isTransitioning ? "transition-transform duration-700 ease-in-out" : ""}`}
+        className={`m-20 flex ${isTransitioning ? "transition-transform duration-700 ease-in-out" : ""}`}
         style={{
           transform: `translateX(-${currentIndex * 100}%)`,
         }}
       >
         {extendedImages.map((img, idx) => (
-          <div key={idx} className="w-full flex-shrink-0 h-[80vh]">
+          <div key={idx} className="w-full flex-shrink-0 h-[90vh]">
             <img
               src={img}
               alt={`Slide ${idx + 1}`}
-              className="h-[80vh] w-[80vh] m-auto object-contain"
+              className="h-[90vh] w-[90vh] m-auto object-contain"
             />
           </div>
         ))}
