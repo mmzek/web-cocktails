@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
-
-//placeholders for now
-import drugiImg from "../assets/drugi.png";
-import trzeciImg from "../assets/trzeci.png";
-import czwartyImg from "../assets/czwarty.png";
-const images = [drugiImg, trzeciImg, czwartyImg];
+import { useCocktails } from "../hooks/use-cocktails";
 
 function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
+  const [images, setImages] = useState<string[]>([]);
+const { cocktails } = useCocktails();
+const ids = [11053, 12474, 12256];
+
+useEffect(() => {
+  if (cocktails.length > 0) {
+    const chosen = cocktails.filter(c => ids.includes(Number(c.id)));
+    setImages(chosen.map(c => c.imageUrl));
+  }
+}, [cocktails]);
+ console.log(images)
   const extendedImages = [...images, images[0]];
 
   useEffect(() => {
@@ -40,11 +46,11 @@ function HeroSection() {
           transform: `translateX(-${currentIndex * 100}%)`,
         }}
       >
-        {extendedImages.map((img, idx) => (
+        {extendedImages.map((cocktail, idx) => (
           <div key={idx} className="w-full flex-shrink-0 h-[90vh]">
             <img
-              src={img}
-              alt={`Slide ${idx + 1}`}
+              src={cocktail}
+              alt={cocktail}
               className="h-[90vh] w-[90vh] m-auto object-contain"
             />
           </div>
