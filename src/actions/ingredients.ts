@@ -25,7 +25,7 @@ export async function getCocktailDetails(id: number): Promise<Details | null> {
   try {
     const response = await fetch(`${url}${id}`);
     const result = await response.json();
-    console.log("result", result)
+    console.log("result", result);
 
     if (!response.ok) {
       console.error("Failed to fetch cocktail details");
@@ -48,7 +48,7 @@ export async function getCocktailDetails(id: number): Promise<Details | null> {
       instructions: data.instructions,
       imageUrl: data.imageUrl,
       alcoholic: data.alcoholic,
-      ingredients: data.ingredients.map((ing: any) => ({
+      ingredients: data.ingredients.map((ing: Ingredient) => ({
         id: ing.id,
         name: ing.name,
         description: ing.description,

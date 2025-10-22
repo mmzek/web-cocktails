@@ -1,28 +1,25 @@
 import { useEffect, useState } from "react";
 import { getCocktails, type Cocktail } from "../actions/cocktails";
+import { useQueries } from "@tanstack/react-query";
 
 export function useCocktailsByCategory(categories: string[]) {
-  const [cocktailsByCategory, setCocktailsByCategory] = useState<Record<string, Cocktail[]>>({});
-  const [loading, setLoading] = useState(true);
+  const queries = useQueries({
+    queries: categories.map((category) => ({
+      queryKey: ["cocktails", category],
+      queryFn: () => getCocktails(category),
+      enabled: !!category,
+    })),
+  });
 
-  useEffect(() => {
-    async function loadSequentially() {
-      setLoading(true);
-      const newData: Record<string, Cocktail[]> = {};
-
-      for (const category of categories) {
-        const data = await getCocktails(category);
-        if (data) {
-          newData[category] = data;
-          setCocktailsByCategory({ ...newData });
-        }
-      }
-      setLoading(false);
+  const cocktailsByCategory: Record<string, Cocktail[]> = {};
+  queries.forEach((q, i) => {
+    if (q.data) {
+      cocktailsByCategory[categories[i]] = q.data;
     }
-    if (categories.length > 0) {
-      loadSequentially();
-    }
-  }, [categories]);
+  });
 
-  return { cocktailsByCategory, loading };
+  const loading = queries.some((q) => q.isLoading);
+  const isError = queries.some((q) => q.isError);
+
+  return { cocktailsByCategory, loading, isError };
 }
