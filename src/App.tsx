@@ -46,7 +46,7 @@ export default function App() {
             ) : (
               <>
                 {" "}
-                <Navbar />
+                <Navbar cocktailsByCategory={cocktailsByCategory}/>
                 <HeroSection />
                 <CocktailsList
                   categories={categories}

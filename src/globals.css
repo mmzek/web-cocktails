@@ -160,3 +160,16 @@
 .section-color {
   background-color: rgb(243, 238, 234);
 }
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(78, 78, 78);
+    border-radius: 10px;
+}
