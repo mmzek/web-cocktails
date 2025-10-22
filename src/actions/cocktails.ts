@@ -2,12 +2,9 @@ export interface Cocktail{
     id: number,
     name: string,
     category: string,
-    glass: string, 
-    instructions: string,
     imageUrl: string
-    alcoholic: string
 }
-export async function getCocktails(): Promise<Cocktail[] | null>{
+export async function getCocktails(category: String): Promise<Cocktail[] | null>{
     const url = import.meta.env.VITE_COCKTAILS_API;
     let page = 1;
     let lastPage = 1;
@@ -15,7 +12,7 @@ export async function getCocktails(): Promise<Cocktail[] | null>{
 
   try {
     while (page <= lastPage) {
-      const response = await fetch(`${url}?page=${page}`);
+      const response = await fetch(`${url}?category=${category}&page=${page}`);
       const result = await response.json();
 
       if (!response.ok) {
@@ -26,10 +23,7 @@ export async function getCocktails(): Promise<Cocktail[] | null>{
       id: data.id,
       name: data.name,
       category: data.category,
-      glass: data.glass,
-      instructions: data.instructions,
       imageUrl: data.imageUrl,
-      alcoholic: data.alcoholic,
     }));
     all.push(...cocktails);
      lastPage = result.meta.lastPage ?? 1;
