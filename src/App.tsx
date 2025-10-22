@@ -7,6 +7,7 @@ import Description from "./components/description";
 import lottie from "lottie-web";
 import { useCocktailsByCategory } from "./hooks/use-cocktails";
 import { useCategories } from "./hooks/use-categories";
+import Favourites from "./components/favourites";
 
 export default function App() {
   const { categories } = useCategories();
@@ -15,6 +16,7 @@ export default function App() {
     useCocktailsByCategory(loadedCategories);
   const container = useRef<HTMLDivElement | null>(null);
   const [anim, setAnim] = useState(true);
+  const [favouritesTable, setFavouritesTable] = useState<number[]>([])
 
   useEffect(() => {
     if (!container.current) return;
@@ -56,12 +58,14 @@ export default function App() {
                   cocktailsByCategory={cocktailsByCategory}
                   loading={loading}
                 />{" "}
+
               </>
             )}
           </>
         }
       />
-      <Route path="/description/:id" element={<Description />} />
+      <Route path="/description/:id" element={<Description favouritesTable={favouritesTable} setFavouritesTable={setFavouritesTable}/>} />
+      <Route path="/favourites" element={<Favourites favouritesTable={favouritesTable} cocktailsByCategory={cocktailsByCategory}/>} />
     </Routes>
   );
 }
