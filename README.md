@@ -1,7 +1,8 @@
 # 🍹 Cocktail Explorer
 
-**Cocktail Explorer** is a modern web application for browsing, searching, and filtering cocktails. Users can discover new drinks, save their favorites, and check detailed ingredients and preparation instructions.  
+🌐 [Check out the website on GitHub Pages](https://mmzek.github.io/web-cocktails/)
 
+**Cocktail Explorer** is a modern web application for browsing, searching, and filtering cocktails. Users can discover new drinks, save their favorites, and check detailed ingredients and preparation instructions.  
 The app uses the **Cocktails API** available at: [https://cocktails.solvro.pl](https://cocktails.solvro.pl)  
 
 
