@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { getCategories } from "../actions/categories";
 
 export function useCategories() {
-  const [categories, setCategories] = useState<string[]>([]);
-  useEffect(() => {
-    getCategories().then((response) => {
-      console.log("data::::", response);
-      if (response) setCategories(response.map(String));
-    });
-  }, []);
+  const {
+    data: categories = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getCategories,
+  });
 
-  return { categories };
+  return { categories, isLoading, isError, error };
 }

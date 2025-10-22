@@ -12,12 +12,13 @@ import {
   InputGroupInput,
 } from "../components/ui/input-group";
 import { Drawer, DrawerContent } from "../components/ui/drawer";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 export function useIsMobile() {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 880);
     };
     checkMobile();
     window.addEventListener("resize", checkMobile);
@@ -32,13 +33,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({ cocktailsByCategory }: NavbarProps) {
-  const categories = [
-    "Cocktail",
-    "Ordinary Drink",
-    "Party Drink",
-    "Shake",
-    "Homemade Liqueur",
-  ];
+  const categories = ["Cocktail", "Ordinary Drink", "Party Drink", "Shake"];
   const isMobile = useIsMobile();
   const [openDrawer, setOpenDrawer] = useState(false);
   const navigate = useNavigate();
@@ -115,6 +110,7 @@ export default function Navbar({ cocktailsByCategory }: NavbarProps) {
         </InputGroup>
       </div>{" "}
       <Drawer open={openDrawer} onOpenChange={setOpenDrawer} direction="top">
+        <DialogTitle></DialogTitle>
         <DrawerContent className="pt-15 bg-black/30 backdrop-blur-[12px]">
           <ul className="max-h-50vh overflow-y-auto scrollbar-thin scrollbar-thumb-black scrollbar-track-black m-10">
             {filtered?.map((data) => (

@@ -7,9 +7,12 @@ import Description from "./components/description";
 import lottie from "lottie-web";
 import { useCocktailsByCategory } from "./hooks/use-cocktails";
 import { useCategories } from "./hooks/use-categories";
+
 export default function App() {
   const { categories } = useCategories();
-  const { loading, cocktailsByCategory } = useCocktailsByCategory(categories);
+  const loadedCategories = categories ?? [];
+  const { loading, cocktailsByCategory } =
+    useCocktailsByCategory(loadedCategories);
   const container = useRef<HTMLDivElement | null>(null);
   const [anim, setAnim] = useState(true);
 
@@ -47,9 +50,9 @@ export default function App() {
               <>
                 {" "}
                 <Navbar cocktailsByCategory={cocktailsByCategory} />
-                <HeroSection />
+                <HeroSection cocktailsByCategory={cocktailsByCategory} />
                 <CocktailsList
-                  categories={categories}
+                  categories={loadedCategories}
                   cocktailsByCategory={cocktailsByCategory}
                   loading={loading}
                 />{" "}

@@ -11,6 +11,6 @@ export async function getCategories(): Promise<string[] | null> {
     return categories;
   } catch (err) {
     console.error("Qeury error:", err);
-    return null;
+    return [];
   }
 }
