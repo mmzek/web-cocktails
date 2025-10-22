@@ -151,12 +151,12 @@
   }
 }
 
-.animation-slide{
+.animation-slide {
   animation: slide linear;
   animation-timeline: view();
   animation-range: entry 0% cover 30%;
 }
 
-.section-color{
+.section-color {
   background-color: rgb(243, 238, 234);
 }

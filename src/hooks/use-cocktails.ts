@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { getCocktails, type Cocktail } from "../actions/cocktails";
 
 export function useCocktailsByCategory(categories: string[]) {
-  const [cocktailsByCategory, setCocktailsByCategory] = useState<Record<string, Cocktail[]>>({});
+  const [cocktailsByCategory, setCocktailsByCategory] = useState<
+    Record<string, Cocktail[]>
+  >({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
