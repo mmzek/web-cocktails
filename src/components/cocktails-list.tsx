@@ -1,7 +1,7 @@
 import { Button } from "../components/ui/button";
 import { type Cocktail } from "../actions/cocktails";
 import { useNavigate } from "react-router-dom";
-import heart from "../assets/white-heart.svg"
+import heart from "../assets/white-heart.svg";
 
 import "../globals.css";
 import {
@@ -26,9 +26,12 @@ export default function CocktailsList({
 
   return (
     <div className="pt-10 pb-20 w-9/10 m-auto">
-       <div className="fixed bottom-4 right-4 w-12 h-12 rounded-xl bg-gray-500 flex items-center justify-center shadow-lg" onClick={() => navigate(`/favourites`)}>
-  <img src={heart} alt="heart icon" className="w-5 h-5" />
-</div>
+      <div
+        className="fixed bottom-4 right-4 w-12 h-12 rounded-xl bg-gray-500 flex items-center justify-center shadow-lg"
+        onClick={() => navigate(`/favourites`)}
+      >
+        <img src={heart} alt="heart icon" className="w-5 h-5" />
+      </div>
       {loading && Object.keys(cocktailsByCategory).length === 0 && (
         <p className="text-center text-gray-500">Ładowanie koktajli...</p>
       )}

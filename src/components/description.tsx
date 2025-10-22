@@ -8,8 +8,8 @@ import car from "../assets/car.svg";
 import attention from "../assets/attention.svg";
 import glass from "../assets/glass.svg";
 import { Button } from "./ui/button";
-import whiteHeart from "../assets/white-heart.svg"
-import redHeart from "../assets/red-heart.svg"
+import whiteHeart from "../assets/white-heart.svg";
+import redHeart from "../assets/red-heart.svg";
 import { useNavigate } from "react-router-dom";
 
 type DescriptionProps = {
@@ -17,10 +17,13 @@ type DescriptionProps = {
   favouritesTable: number[];
 };
 
-export default function Description({setFavouritesTable, favouritesTable}: DescriptionProps) {
+export default function Description({
+  setFavouritesTable,
+  favouritesTable,
+}: DescriptionProps) {
   const { id } = useParams<{ id: string }>();
   const [details, setDetails] = useState<Details | null>(null);
-  const [isFavourite, setIsFavourite]=useState(false)
+  const [isFavourite, setIsFavourite] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,9 +51,12 @@ export default function Description({setFavouritesTable, favouritesTable}: Descr
 
   return (
     <div>
-      <div className="fixed bottom-4 right-4 w-12 h-12 rounded-xl bg-gray-500 flex items-center justify-center shadow-lg" onClick={() => navigate(`/favourites`)}>
-  <img src={whiteHeart} alt="heart icon" className="w-5 h-5" />
-</div>
+      <div
+        className="fixed bottom-4 right-4 w-12 h-12 rounded-xl bg-gray-500 flex items-center justify-center shadow-lg"
+        onClick={() => navigate(`/favourites`)}
+      >
+        <img src={whiteHeart} alt="heart icon" className="w-5 h-5" />
+      </div>
       <div className="mx-6 my-10 flex flex-col md:flex-row items-start gap-8 md:mx-30 md:my-15">
         <div className="md:w-3/5 sm:w-full inline-block overflow-hidden rounded-2xl">
           <img
@@ -107,12 +113,22 @@ export default function Description({setFavouritesTable, favouritesTable}: Descr
             </div>
           )}
           <div className="flex justify-center">
-           
-  <Button variant="secondary" className="section-color h-10 m-10" onClick={() => details?.id !== undefined && toggleFavourite(details.id)}
-> {isFavourite ? (<img src={redHeart} alt="heart icon" className=" w-6 h-6" />) : (<img src={whiteHeart} alt="heart icon" className=" w-6 h-6" />)}
-    Add to favourites
-  </Button>
-</div>
+            <Button
+              variant="secondary"
+              className="section-color h-10 m-10"
+              onClick={() =>
+                details?.id !== undefined && toggleFavourite(details.id)
+              }
+            >
+              {" "}
+              {isFavourite ? (
+                <img src={redHeart} alt="heart icon" className=" w-6 h-6" />
+              ) : (
+                <img src={whiteHeart} alt="heart icon" className=" w-6 h-6" />
+              )}
+              Add to favourites
+            </Button>
+          </div>
         </div>
       </div>
       <Ingredients details={details} />

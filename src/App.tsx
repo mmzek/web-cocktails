@@ -16,7 +16,7 @@ export default function App() {
     useCocktailsByCategory(loadedCategories);
   const container = useRef<HTMLDivElement | null>(null);
   const [anim, setAnim] = useState(true);
-  const [favouritesTable, setFavouritesTable] = useState<number[]>([])
+  const [favouritesTable, setFavouritesTable] = useState<number[]>([]);
 
   useEffect(() => {
     if (!container.current) return;
@@ -26,7 +26,7 @@ export default function App() {
       renderer: "svg",
       loop: true,
       autoplay: true,
-      path: "/Cheers!.json",
+      path: "/web-cocktails/Cheers!.json",
     });
     const timer = setTimeout(() => setAnim(false), 3000);
 
@@ -58,14 +58,29 @@ export default function App() {
                   cocktailsByCategory={cocktailsByCategory}
                   loading={loading}
                 />{" "}
-
               </>
             )}
           </>
         }
       />
-      <Route path="/description/:id" element={<Description favouritesTable={favouritesTable} setFavouritesTable={setFavouritesTable}/>} />
-      <Route path="/favourites" element={<Favourites favouritesTable={favouritesTable} cocktailsByCategory={cocktailsByCategory}/>} />
+      <Route
+        path="/description/:id"
+        element={
+          <Description
+            favouritesTable={favouritesTable}
+            setFavouritesTable={setFavouritesTable}
+          />
+        }
+      />
+      <Route
+        path="/favourites"
+        element={
+          <Favourites
+            favouritesTable={favouritesTable}
+            cocktailsByCategory={cocktailsByCategory}
+          />
+        }
+      />
     </Routes>
   );
 }

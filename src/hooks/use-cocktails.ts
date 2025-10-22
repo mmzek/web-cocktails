@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { getCocktails, type Cocktail } from "../actions/cocktails";
 import { useQueries } from "@tanstack/react-query";
 

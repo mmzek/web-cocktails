@@ -9,7 +9,7 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename="/web-cocktails">
         <App />
       </BrowserRouter>
     </QueryClientProvider>
