@@ -52,7 +52,7 @@ export default function App() {
               <>
                 {" "}
                 <Navbar cocktailsByCategory={cocktailsByCategory} />
-                <HeroSection cocktailsByCategory={cocktailsByCategory} />
+                <HeroSection />
                 <CocktailsList
                   categories={loadedCategories}
                   cocktailsByCategory={cocktailsByCategory}

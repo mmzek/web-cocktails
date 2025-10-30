@@ -1,24 +1,12 @@
 import { useEffect, useState } from "react";
-import { type Cocktail } from "../actions/cocktails";
-const ids = [11053, 12474, 12256];
+import firstHeroDrink from "../assets/firstDrink.png";
+import secondHeroDrink from "../assets/secondDrink.png";
+import thirdHeroDrink from "../assets/thirdDrink.png";
 
-interface HeroSectionProps {
-  cocktailsByCategory: Record<string, Cocktail[]>;
-}
-
-function HeroSection({ cocktailsByCategory }: HeroSectionProps) {
+function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
-  const [images, setImages] = useState<string[]>([]);
-
-  useEffect(() => {
-    const allCocktails = Object.values(cocktailsByCategory).flat();
-    if (allCocktails.length > 0) {
-      const chosen = allCocktails.filter((c) => ids.includes(Number(c.id)));
-      setImages(chosen.map((c) => c.imageUrl));
-    }
-  }, [cocktailsByCategory]);
-  const extendedImages = [...images, images[0]];
+  const images = [firstHeroDrink, secondHeroDrink, thirdHeroDrink, firstHeroDrink];
 
   useEffect(() => {
     if (images.length === 0) return;
@@ -29,7 +17,7 @@ function HeroSection({ cocktailsByCategory }: HeroSectionProps) {
   }, [images]);
 
   useEffect(() => {
-    if (currentIndex === extendedImages.length - 1) {
+    if (currentIndex === images.length - 1) {
       const transitionTimeout = setTimeout(() => {
         setIsTransitioning(false);
         setCurrentIndex(0);
@@ -38,7 +26,7 @@ function HeroSection({ cocktailsByCategory }: HeroSectionProps) {
     } else {
       setIsTransitioning(true);
     }
-  }, [currentIndex, extendedImages.length]);
+  }, [currentIndex, images.length]);
 
   return (
     <div className="relative w-full overflow-hidden h-[100vh] bg-black">
@@ -48,7 +36,7 @@ function HeroSection({ cocktailsByCategory }: HeroSectionProps) {
           transform: `translateX(-${currentIndex * 100}%)`,
         }}
       >
-        {extendedImages.map((cocktail, idx) => (
+        {images.map((cocktail, idx) => (
           <div key={idx} className="w-full flex-shrink-0 h-[90vh]">
             <img
               src={cocktail}
