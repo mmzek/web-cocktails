@@ -11,43 +11,20 @@ import { Button } from "./ui/button";
 import whiteHeart from "../assets/white-heart.svg";
 import redHeart from "../assets/red-heart.svg";
 import { useNavigate } from "react-router-dom";
+import { useFavourites } from "./favourites";
 
-type DescriptionProps = {
-  setFavouritesTable: React.Dispatch<React.SetStateAction<number[]>>;
-  favouritesTable: number[];
-};
-
-export default function Description({
-  setFavouritesTable,
-  favouritesTable,
-}: DescriptionProps) {
+export default function Description() {
   const { id } = useParams<{ id: string }>();
   const [details, setDetails] = useState<Details | null>(null);
-  const [isFavourite, setIsFavourite] = useState(false);
   const navigate = useNavigate();
+  const { favourites, toggle } = useFavourites();
+  const isFavourite = details?.id ? favourites.includes(details.id) : false;
 
   useEffect(() => {
     if (id) {
       getCocktailDetails(Number(id)).then(setDetails);
     }
   }, [id]);
-
-  useEffect(() => {
-    if (details?.id) {
-      setIsFavourite(favouritesTable.includes(details.id));
-    }
-  }, [details, favouritesTable]);
-
-  function toggleFavourite(drinkId: number) {
-    setIsFavourite((prev) => !prev);
-    setFavouritesTable((prev) => {
-      if (prev.includes(drinkId)) {
-        return prev.filter((favId) => favId !== drinkId);
-      } else {
-        return [...prev, drinkId];
-      }
-    });
-  }
 
   return (
     <div>
@@ -115,10 +92,8 @@ export default function Description({
           <div className="flex justify-center">
             <Button
               variant="secondary"
-              className="section-color h-10 m-10"
-              onClick={() =>
-                details?.id !== undefined && toggleFavourite(details.id)
-              }
+              className="cursor-pointer section-color h-10 m-10"
+              onClick={() => details?.id !== undefined && toggle(details.id)}
             >
               {" "}
               {isFavourite ? (

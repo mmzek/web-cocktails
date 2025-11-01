@@ -27,7 +27,7 @@ export default function CocktailsList({
   return (
     <div className="pt-10 pb-20 w-9/10 m-auto">
       <div
-        className="fixed bottom-4 right-4 w-12 h-12 rounded-xl bg-gray-500 flex items-center justify-center shadow-lg"
+        className="fixed bottom-4 right-4 w-12 h-12 rounded-xl bg-gray-400 flex items-center justify-center shadow-lg cursor-pointer hover:bg-gray-500"
         onClick={() => navigate(`/favourites`)}
       >
         <img src={heart} alt="heart icon" className="w-5 h-5" />
@@ -51,7 +51,7 @@ export default function CocktailsList({
                   onClick={() => navigate(`/description/${cocktail.id}`)}
                   className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4  ml-2"
                 >
-                  <div className="bg-gray-100 rounded-2xl">
+                  <div className="bg-gray-100 rounded-2xl hover:bg-gray-200 cursor-pointer">
                     <div className="inline-block overflow-hidden rounded-t-2xl ">
                       <img
                         src={cocktail.imageUrl}
@@ -62,7 +62,10 @@ export default function CocktailsList({
                     <h3 className="mt-1 mx-6 font-medium text-gray-600 text-sm">
                       {cocktail.category}
                     </h3>
-                    <Button variant="link" className="mx-2 font-medium text-lg">
+                    <Button
+                      variant="link"
+                      className="mx-2 font-medium text-lg cursor-pointer"
+                    >
                       {cocktail.name}
                     </Button>
                   </div>

@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import {
   InputGroup,
   InputGroupAddon,
-  InputGroupButton,
   InputGroupInput,
 } from "../components/ui/input-group";
 import { Drawer, DrawerContent } from "../components/ui/drawer";
@@ -59,7 +58,6 @@ export default function Navbar({ cocktailsByCategory }: NavbarProps) {
     );
     setFiltered(filteredData);
     setOpenDrawer(true);
-    console.log(filteredData);
   };
 
   return (
@@ -79,7 +77,7 @@ export default function Navbar({ cocktailsByCategory }: NavbarProps) {
             <div key={idx} className="pl-4 pt-4 inline-block">
               <Button
                 variant="ghost"
-                className="text-white text-md"
+                className="text-white text-md cursor-pointer"
                 onClick={() => scrollToCategory(data)}
               >
                 {data}
@@ -99,14 +97,7 @@ export default function Navbar({ cocktailsByCategory }: NavbarProps) {
           <InputGroupAddon>
             <Search className="text-white" />
           </InputGroupAddon>
-          <InputGroupAddon align="inline-end">
-            <InputGroupButton
-              onClick={() => setOpenDrawer(true)}
-              className="text-white"
-            >
-              Search
-            </InputGroupButton>
-          </InputGroupAddon>
+          <InputGroupAddon align="inline-end"></InputGroupAddon>
         </InputGroup>
       </div>{" "}
       <Drawer open={openDrawer} onOpenChange={setOpenDrawer} direction="top">
@@ -116,7 +107,7 @@ export default function Navbar({ cocktailsByCategory }: NavbarProps) {
             {filtered?.map((data) => (
               <div
                 key={data.id}
-                className="flex items-center p-2 my-1 mx-10 rounded-xl"
+                className="flex items-center p-2 my-1 mx-10 rounded-xl hover:bg-[#4e4e4e] cursor-pointer"
                 onClick={() => navigate(`/description/${data.id}`)}
               >
                 <img

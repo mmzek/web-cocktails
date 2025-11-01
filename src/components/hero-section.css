@@ -1,0 +1,45 @@
+.animation {
+  display: flex;
+  width: 300%;
+  /*3 drinks each taking 2s to transform and 2s to pause*/
+  animation: scroll 12s linear infinite;
+  will-change: transform;
+}
+
+.image-parent {
+  width: calc(100% / 3);
+  flex-shrink: 0;
+  height: 90vh;
+}
+
+.hero-image {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  object-fit: contain;
+}
+
+@keyframes scroll {
+  /* there are 3 pauses and 3 transitions, soo 100% : 6 = 16,67% */
+  0%,
+  16.67% {
+    transform: translateX(0%);
+  }
+  33.33% {
+    transform: translateX(-33.333%);
+  }
+  33.33%,
+  50% {
+    transform: translateX(-33.333%);
+  }
+  66.67% {
+    transform: translateX(-66.666%);
+  }
+  66.67%,
+  83.33% {
+    transform: translateX(-66.666%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
